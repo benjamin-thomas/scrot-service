@@ -17,10 +17,10 @@ cp -s $(pwd)/bin/scrot-service-read ~/.local/bin/
 mkdir -p ~/.local/systemd-bin/
 mkdir -p ~/.config/systemd/user/
 
-# systemd does not like symlinks
-cp -l $(pwd)/bin/scrot-service-run ~/.local/systemd-bin/
+cp -s $(pwd)/bin/scrot-service-run ~/.local/systemd-bin/
 
-cp $(pwd)/.config/systemd/user/scrot.service  ~/.config/systemd/user/
+# systemd does not like symlinks
+cp -l $(pwd)/.config/systemd/user/scrot.service  ~/.config/systemd/user/
 
 systemctl --user daemon-reload
 systemctl --user start scrot.service
