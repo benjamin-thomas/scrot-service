@@ -21,7 +21,11 @@ This seems the best solution, as opening up DISPLAY and XAUTHORITY to a dedicate
 - imagemagick (for timestamping screenshots, makes following the slideshow easier)
 - scrot (basic screenshoting tool)
 
-## Install/remove
+## Test before install (as current user)
+
+    ./bin/scrot-service-run
+
+## Install/remove (as a systemd user service)
 
     ./manage/install
     ./manage/uninstall
