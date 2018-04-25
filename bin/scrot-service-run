@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+
+ACTIVITY_PATH = File.expand_path('~/Images/Activity')
+
+# (8 * hour) / minute = 480 (screenshots)
+# Playing back 5 images per second, I could replay my day's work in less than 2 minutes
+# ((480 * second) / minute) / 5 = 1.6
+SLEEP_SEC = 60
+
+loop do
+  now = Time.now
+
+  scrot_path = File.join([ACTIVITY_PATH, now.strftime("%Y-%m-%d/%H:%M:%S.jpg")])
+  scrot_dir = File.dirname(scrot_path)
+
+  Dir.exist?(scrot_dir) || FileUtils.mkdir_p(scrot_dir)
+
+  warn("Taking screenshot: #{scrot_path}")
+  system('scrot', '--focused', scrot_path)
+
+  # mogrify -fill red -gravity SouthEast -pointsize 40 -draw 'text 25,25 "hello world"' hi.jpg
+  system('mogrify',
+         '-fill', 'red',
+         '-gravity', 'SouthEast',
+         '-pointsize', '35',
+         '-draw', "text 40,40 \"#{now.strftime("%d %b  %H:%M")}\"",
+         scrot_path
+        )
+
+  sleep(SLEEP_SEC)
+end

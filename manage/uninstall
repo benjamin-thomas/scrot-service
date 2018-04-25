@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -x
+
+systemctl --user disable scrot.service
+systemctl --user stop scrot.service
+systemctl --user daemon-reload
+
+rm ~/.local/bin/scrot-service-read
+rm ~/.local/systemd-bin/scrot-service-run
+rm ~/.config/systemd/user/scrot.service

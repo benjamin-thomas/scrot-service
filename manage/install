@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+set -x
+
+cp -s $(pwd)/bin/scrot-service-read ~/.local/bin/
+
+mkdir -p ~/.local/systemd-bin/
+
+# systemd does not like symlinks
+cp -l $(pwd)/bin/scrot-service-run ~/.local/systemd-bin/
+
+cp $(pwd)/.config/systemd/user/scrot.service  ~/.config/systemd/user/
+
+systemctl --user daemon-reload
+systemctl --user start scrot.service
+systemctl --user enable scrot.service
+
+journalctl --user-unit scrot.service --since today -f

@@ -1,0 +1,10 @@
+[Unit]
+Description=Take screenshots every 60s
+
+[Service]
+Environment=HOME=%h
+Environment=DISPLAY=:0
+ExecStart=/bin/bash -c '%h/.local/systemd-bin/scrot-service-run'
+
+[Install]
+WantedBy=default.target

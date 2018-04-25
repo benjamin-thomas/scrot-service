@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'date'
+require 'fileutils'
+
+ACTIVITY_PATH = File.expand_path('~/Images/Activity')
+
+cmd = [
+  'feh',
+  File.join(
+    ACTIVITY_PATH,
+    String(Date.today),
+  )
+]
+
+ARGV.each do |arg|
+  if ['-h', '--help'].include?(arg)
+    warn("Usage #{File.basename($0)} [movie reverse]")
+    exit 1
+  end
+
+  cmd << '--slideshow-delay' << '0.2' if arg == 'movie'
+  cmd << '--reverse' if arg == 'reverse'
+end
+
+exec(*cmd)
