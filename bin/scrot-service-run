@@ -20,7 +20,6 @@ loop do
   warn("Taking screenshot: #{scrot_path}")
   system('scrot', '--focused', scrot_path)
 
-  # mogrify -fill red -gravity SouthEast -pointsize 40 -draw 'text 25,25 "hello world"' hi.jpg
   system('mogrify',
          '-fill', 'red',
          '-gravity', 'SouthEast',
