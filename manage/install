@@ -3,6 +3,15 @@
 set -e
 set -x
 
+function missing_dep {
+  echo "Missing dependency: $1, exting now!"
+  exit 1
+}
+
+command -v feh || missing_dep "feh"
+command -v scrot || missing_dep "scrot"
+command -v mogrify || missing_dep "mogrify (from imagemagick)"
+
 cp -s $(pwd)/bin/scrot-service-read ~/.local/bin/
 
 mkdir -p ~/.local/systemd-bin/
