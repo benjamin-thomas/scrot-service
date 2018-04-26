@@ -4,10 +4,7 @@ require 'fileutils'
 
 ACTIVITY_PATH = File.expand_path('~/Images/Activity')
 
-# (8 * hour) / minute = 480 (screenshots)
-# Playing back 5 images per second, I could replay my day's work in less than 2 minutes
-# ((480 * second) / minute) / 5 = 1.6
-SLEEP_SEC = 60
+ONE_MINUTE = 60
 
 loop do
   now = Time.now
@@ -24,9 +21,9 @@ loop do
          '-fill', 'red',
          '-gravity', 'SouthEast',
          '-pointsize', '35',
-         '-draw', "text 40,40 \"#{now.strftime("%d %b  %H:%M")}\"",
+         '-draw', "text 40,40 \"#{now.strftime("%d %b  %H:%M:%S")}\"",
          scrot_path
         )
 
-  sleep(SLEEP_SEC)
+  sleep(ONE_MINUTE / 3)
 end
